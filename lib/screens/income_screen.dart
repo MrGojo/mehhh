@@ -11,7 +11,7 @@ class IncomeScreen extends StatefulWidget {
 
 class _IncomeScreenState extends State<IncomeScreen> {
   final _formKey = GlobalKey<FormState>();
-  String? _selectedAnnualIncome;
+  final _annualIncomeController = TextEditingController();
   String? _selectedCategory;
   final _sourceController = TextEditingController();
   final _ageController = TextEditingController();
@@ -19,10 +19,10 @@ class _IncomeScreenState extends State<IncomeScreen> {
 
   // List of categories
   final List<String> _categories = [
-    'EWS',
-    'SC/ST',
-    'OBC',
-    'General',
+    'sc',
+    'st',
+    'obc',
+    'general',
   ];
 
   Future<void> _pickDocument() async {
@@ -113,27 +113,23 @@ class _IncomeScreenState extends State<IncomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              DropdownButtonFormField<String>(
-                value: _selectedAnnualIncome,
+              TextFormField(
+                controller: _annualIncomeController,
+                keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
-                  labelText: 'Annual Income',
+                  labelText: 'Annual Income (in ₹)',
                   border: OutlineInputBorder(),
                   filled: true,
                   fillColor: Colors.white,
+                  prefixText: '₹ ',
                 ),
-                items: ['Below 1 Lakh', '1-3 Lakhs', '3-5 Lakhs', 'Above 5 Lakhs']
-                    .map((income) => DropdownMenuItem(
-                          value: income,
-                          child: Text(income),
-                        ))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedAnnualIncome = value;
-                  });
-                },
                 validator: (value) {
-                  if (value == null) return 'Please select annual income';
+                  if (value?.isEmpty ?? true) {
+                    return 'Please enter your annual income';
+                  }
+                  if (int.tryParse(value!) == null) {
+                    return 'Please enter a valid number';
+                  }
                   return null;
                 },
               ),
@@ -255,6 +251,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
 
   @override
   void dispose() {
+    _annualIncomeController.dispose();
     _sourceController.dispose();
     _ageController.dispose();
     super.dispose();

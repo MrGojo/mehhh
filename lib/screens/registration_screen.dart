@@ -17,15 +17,47 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _aadharController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _firstNameController = TextEditingController();
-  final _middleNameController = TextEditingController();
-  final _phoneController = TextEditingController();
   final _ageController = TextEditingController();
   String? _selectedGender;
+  String? _selectedState;
+
+  // List of Indian states
+  final List<String> _states = [
+    'Andhra Pradesh',
+    'Arunachal Pradesh',
+    'Assam',
+    'Bihar',
+    'Chhattisgarh',
+    'Goa',
+    'Gujarat',
+    'Haryana',
+    'Himachal Pradesh',
+    'Jharkhand',
+    'Karnataka',
+    'Kerala',
+    'Madhya Pradesh',
+    'Maharashtra',
+    'Manipur',
+    'Meghalaya',
+    'Mizoram',
+    'Nagaland',
+    'Odisha',
+    'Punjab',
+    'Rajasthan',
+    'Sikkim',
+    'Tamil Nadu',
+    'Telangana',
+    'Tripura',
+    'Uttar Pradesh',
+    'Uttarakhand',
+    'West Bengal',
+  ];
 
   bool get _isFormValid {
     return _formKey.currentState?.validate() == true && 
            _isChecked && 
-           _selectedGender != null;
+           _selectedGender != null &&
+           _selectedState != null;
   }
 
   @override
@@ -79,21 +111,32 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   },
                 ),
                 
-                CustomTextField(
-                  controller: _middleNameController,
-                  label: 'Middle name',
-                ),
-                
-                CustomTextField(
-                  controller: _phoneController,
-                  label: 'Phone number',
+                // State Dropdown
+                DropdownButtonFormField<String>(
+                  value: _selectedState,
+                  decoration: const InputDecoration(
+                    labelText: 'State',
+                    border: OutlineInputBorder(),
+                    filled: true,
+                    fillColor: Colors.white,
+                  ),
+                  items: _states
+                      .map((state) => DropdownMenuItem(
+                            value: state,
+                            child: Text(state),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedState = value;
+                    });
+                  },
                   validator: (value) {
-                    if (value?.isEmpty ?? true) return 'Phone number is required';
-                    if (value!.length != 10) return 'Invalid phone number';
+                    if (value == null) return 'Please select your state';
                     return null;
                   },
-                  keyboardType: TextInputType.phone,
                 ),
+                const SizedBox(height: 15),
                 
                 DropdownButtonFormField<String>(
                   value: _selectedGender,
@@ -103,7 +146,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     filled: true,
                     fillColor: Colors.white,
                   ),
-                  items: ['Male', 'Female', 'Other']
+                  items: ['male', 'female', 'other']
                       .map((gender) => DropdownMenuItem(
                             value: gender,
                             child: Text(gender),
@@ -146,7 +189,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       },
                     ),
                     const Text(
-                      'Kabool hai',
+                      'Accept all',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.black87,
@@ -204,8 +247,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     _aadharController.dispose();
     _lastNameController.dispose();
     _firstNameController.dispose();
-    _middleNameController.dispose();
-    _phoneController.dispose();
     _ageController.dispose();
     super.dispose();
   }
