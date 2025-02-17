@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Image.asset(
-                            'assets/seva_setu_logo.png',
+                            'assets/images/seva_setu_logo.png',
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -119,14 +119,32 @@ class HomeScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SocialButton(
-                            iconPath: 'assets/google_icon.png',
-                            onPressed: () {},
+                          // Google Button
+                          Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Colors.orange,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.mail_outline,  // Using mail icon for Google
+                              color: Colors.white,
+                              size: 24,
+                            ),
                           ),
                           const SizedBox(width: 20),
-                          SocialButton(
-                            iconPath: 'assets/facebook_icon.png',
-                            onPressed: () {},
+                          // Facebook Button
+                          Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Colors.orange,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.facebook,  // Using Facebook icon
+                              color: Colors.white,
+                              size: 24,
+                            ),
                           ),
                         ],
                       ),

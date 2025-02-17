@@ -383,10 +383,9 @@ class DashboardScreen extends StatelessWidget {
 
                 // Scheme List
                 const SizedBox(height: 15),
-                _buildClickableSchemeItem('SCHEME 1'),
-                _buildClickableSchemeItem('SCHEME 2'),
-                _buildClickableSchemeItem('SCHEME 3'),
-                _buildClickableSchemeItem('SCHEME 4'),
+                _buildClickableSchemeItem('FAQ'),
+                _buildClickableSchemeItem('HELP AND SUPPORT'),
+               
 
                 const SizedBox(height: 80), // Bottom spacing for navigation bar
               ],

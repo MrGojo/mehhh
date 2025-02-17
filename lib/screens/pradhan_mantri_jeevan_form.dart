@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'profile_screen.dart';
 
 class PradhanMantriJeevanForm extends StatefulWidget {
   const PradhanMantriJeevanForm({super.key});
@@ -263,7 +264,13 @@ class _PradhanMantriJeevanFormState extends State<PradhanMantriJeevanForm> {
                         _addressFile != null &&
                         _bankFile != null) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Application')),
+                        const SnackBar(content: Text('Application Submitted Successfully')),
+                      );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ProfileScreen(),
+                        ),
                       );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(

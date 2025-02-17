@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'profile_screen.dart';
 
 class NationalElectricForm extends StatefulWidget {
   const NationalElectricForm({Key? key}) : super(key: key);
@@ -287,7 +288,13 @@ class _NationalElectricFormState extends State<NationalElectricForm> {
                         _incomeFile != null &&
                         _vehicleFile != null) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Application')),
+                        const SnackBar(content: Text('Application Submitted Successfully')),
+                      );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ProfileScreen(),
+                        ),
                       );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
