@@ -4,6 +4,7 @@ import 'medical_schemes_screen.dart';
 import 'vehicle_schemes_screen.dart';
 import 'family_schemes_screen.dart';
 import 'personal_schemes_screen.dart';
+import 'gpt_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   final String userName;
@@ -77,8 +78,109 @@ class DashboardScreen extends StatelessWidget {
                         onPressed: () {},
                       ),
                       IconButton(
-                        icon: const Icon(Icons.settings_outlined),
-                        onPressed: () {},
+                        icon: const Icon(Icons.chat_outlined),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Dialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                backgroundColor: Colors.white,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      // Title
+                                      const Row(
+                                        children: [
+                                          Icon(
+                                            Icons.smart_toy_outlined,
+                                            color: Color(0xFF1B4B3C),
+                                            size: 24,
+                                          ),
+                                          SizedBox(width: 8),
+                                          Text(
+                                            'Chat Assistant',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xFF1B4B3C),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 16),
+                                      
+                                      // Content
+                                      const Text(
+                                        'Hello! I\'m your Seva Setu assistant.\nHow can I help you today?',
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      const Text(
+                                        'I can help you with:',
+                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      const Text('• Finding suitable schemes'),
+                                      const Text('• Application process'),
+                                      const Text('• Document requirements'),
+                                      const Text('• Eligibility criteria'),
+                                      
+                                      const SizedBox(height: 24),
+                                      
+                                      // Buttons
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(context),
+                                            child: const Text(
+                                              'Close',
+                                              style: TextStyle(
+                                                color: Color(0xFF1B4B3C),
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(width: 8),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => const GptScreen(),
+                                                ),
+                                              );
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: const Color(0xFF1B4B3C),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                            ),
+                                            child: const Text(
+                                              'Start Chat',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
                       ),
                     ],
                   ),
