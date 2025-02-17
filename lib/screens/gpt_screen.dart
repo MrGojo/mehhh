@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class GptScreen extends StatefulWidget {
-  const GptScreen({Key? key}) : super(key: key);  // Fixed constructor
+  const GptScreen({Key? key}) : super(key: key);
 
   @override
   State<GptScreen> createState() => _GptScreenState();
@@ -10,18 +12,46 @@ class GptScreen extends StatefulWidget {
 class _GptScreenState extends State<GptScreen> {
   final List<String> messages = [];
   final TextEditingController _controller = TextEditingController();
+  bool _isLoading = false;
 
-  void _sendMessage() {
+  Future<String> _getGeminiResponse(String prompt) async {
+    setState(() => _isLoading = true);
+    
+    try {
+      final response = await http.post(
+        Uri.parse('https://ey-flask.onrender.com/chat'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'prompt': prompt,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data['response'] as String;
+      } else {
+        return 'Sorry, I encountered an error. Please try again.';
+      }
+    } catch (e) {
+      return 'Network error occurred. Please check your connection.';
+    } finally {
+      setState(() => _isLoading = false);
+    }
+  }
+
+  Future<void> _sendMessage() async {
     if (_controller.text.isNotEmpty) {
+      final userMessage = _controller.text;
       setState(() {
-        messages.add(_controller.text);
+        messages.add(userMessage);
         _controller.clear();
       });
 
-      Future.delayed(const Duration(seconds: 1), () {
-        setState(() {
-          messages.add("This is a response to: ${messages.last}");
-        });
+      final response = await _getGeminiResponse(userMessage);
+      setState(() {
+        messages.add(response);
       });
     }
   }
@@ -61,6 +91,16 @@ class _GptScreenState extends State<GptScreen> {
                           ? const Color(0xFF1B4B3C) 
                           : Colors.white,
                       borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width * 0.75,
                     ),
                     child: Text(
                       messages[index],
@@ -73,6 +113,13 @@ class _GptScreenState extends State<GptScreen> {
               },
             ),
           ),
+          if (_isLoading)
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1B4B3C)),
+              ),
+            ),
           Container(
             padding: const EdgeInsets.all(8.0),
             decoration: const BoxDecoration(
