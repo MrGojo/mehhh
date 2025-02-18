@@ -111,7 +111,7 @@ class ProfileScreen extends StatelessWidget {
                               ),
                               const SizedBox(width: 4),
                               const Text(
-                                'Bhopal',
+                                'Madhya Pradesh',
                                 style: TextStyle(
                                   color: Colors.grey,
                                 ),

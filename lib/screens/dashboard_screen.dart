@@ -208,7 +208,7 @@ class DashboardScreen extends StatelessWidget {
                       child: const Icon(Icons.location_on, color: Colors.white),
                     ),
                     const Text(
-                      '© Bhopal',
+                      'Madhya Pradesh',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -257,11 +257,11 @@ class DashboardScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => const AvailableSchemesScreen(
-                          state: 'Madhya Pradesh',  // Get from registration
-                          age: 25,                  // Get from registration
-                          gender: 'Female',         // Get from registration
-                          annualIncome: 250000,     // Get from income screen
-                          category: 'General',      // Get from income screen
+                          state: 'Madhya Pradesh',
+                          age: 28,
+                          gender: 'Female',
+                          annualIncome: 120000,
+                          category: 'OBC',
                         ),
                       ),
                     );
