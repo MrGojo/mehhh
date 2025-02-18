@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'login_screen.dart';
 import 'home_screen.dart';
 import 'registration_screen.dart';
+import 'dashboard_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -23,22 +24,32 @@ class ProfileScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/images/seva_setu_logo.png',
-                              height: 30,
-                            ),
-                            const SizedBox(width: 8),
-                            const Text(
-                              'SEVA SETU',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF1B4B3C),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const DashboardScreen(),
                               ),
-                            ),
-                          ],
+                            );
+                          },
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'assets/images/seva_setu_logo.png',
+                                height: 30,
+                              ),
+                              const SizedBox(width: 8),
+                              const Text(
+                                'SEVA SETU',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF1B4B3C),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         Stack(
                           children: [

@@ -6,6 +6,8 @@ import 'family_schemes_screen.dart';
 import 'personal_schemes_screen.dart';
 import 'gpt_screen.dart';
 import 'available_schemes_screen.dart';
+import 'faq_screen.dart';
+import 'help_support_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   final String userName;
@@ -441,30 +443,48 @@ class DashboardScreen extends StatelessWidget {
   }
 
   Widget _buildClickableSchemeItem(String title) {
-    return InkWell(
-      onTap: () {
-        // Add navigation logic for scheme item
-      },
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 10),
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          color: const Color(0xFFE8FAE0),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontWeight: FontWeight.w500,
-              ),
+    return Builder(
+      builder: (BuildContext context) {
+        return InkWell(
+          onTap: () {
+            if (title == 'FAQ') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const FAQScreen(),
+                ),
+              );
+            } else if (title == 'HELP AND SUPPORT') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HelpSupportScreen(),
+                ),
+              );
+            }
+          },
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              color: const Color(0xFFE8FAE0),
+              borderRadius: BorderRadius.circular(10),
             ),
-            const Icon(Icons.info_outline, size: 20),
-          ],
-        ),
-      ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const Icon(Icons.info_outline, size: 20),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
