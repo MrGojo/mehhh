@@ -5,6 +5,7 @@ import 'vehicle_schemes_screen.dart';
 import 'family_schemes_screen.dart';
 import 'personal_schemes_screen.dart';
 import 'gpt_screen.dart';
+import 'available_schemes_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   final String userName;
@@ -250,17 +251,33 @@ class DashboardScreen extends StatelessWidget {
                   color: const Color(0xFFE8FAE0),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Available schemes for priya',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AvailableSchemesScreen(
+                          state: 'Madhya Pradesh',  // Get from registration
+                          age: 25,                  // Get from registration
+                          gender: 'Female',         // Get from registration
+                          annualIncome: 250000,     // Get from income screen
+                          category: 'General',      // Get from income screen
+                        ),
                       ),
-                    ),
-                    Icon(Icons.info_outline),
-                  ],
+                    );
+                  },
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Available schemes for priya',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Icon(Icons.info_outline),
+                    ],
+                  ),
                 ),
               ),
 
