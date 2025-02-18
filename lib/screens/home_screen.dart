@@ -3,6 +3,7 @@ import '../widgets/custom_button.dart';
 import '../widgets/social_button.dart';
 import 'registration_screen.dart';
 import 'login_screen.dart';
+import 'admin_statistics_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -31,8 +32,19 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.menu),
-                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.account_balance, // Government building icon
+                        color: Color(0xFF1B4B3C), // Using app's primary color
+                        size: 28, // Slightly larger size for better visibility
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AdminStatisticsScreen(),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
