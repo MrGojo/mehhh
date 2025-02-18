@@ -13,7 +13,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
   final _formKey = GlobalKey<FormState>();
   final _annualIncomeController = TextEditingController();
   String? _selectedCategory;
-  final _sourceController = TextEditingController();
+  String? _selectedSource;
   final _ageController = TextEditingController();
   PlatformFile? _selectedFile;
 
@@ -23,6 +23,21 @@ class _IncomeScreenState extends State<IncomeScreen> {
     'st',
     'obc',
     'general',
+  ];
+
+  // List of income sources
+  final List<String> _incomeSources = [
+    'Agriculture',
+    'Teaching',
+    'Business',
+    'Corporate Job',
+    'Healthcare',
+    'Freelancing & Gig Economy',
+    'Sports & Fitness',
+    'Hospitality & Tourism',
+    'Finance & Investments',
+    'Technology & Software Development',
+    'Media & Entertainment',
   ];
 
   Future<void> _pickDocument() async {
@@ -135,16 +150,27 @@ class _IncomeScreenState extends State<IncomeScreen> {
               ),
               const SizedBox(height: 15),
 
-              TextFormField(
-                controller: _sourceController,
+              DropdownButtonFormField<String>(
+                value: _selectedSource,
                 decoration: const InputDecoration(
                   labelText: 'Source of Income',
                   border: OutlineInputBorder(),
                   filled: true,
                   fillColor: Colors.white,
                 ),
+                items: _incomeSources
+                    .map((source) => DropdownMenuItem(
+                          value: source,
+                          child: Text(source),
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedSource = value;
+                  });
+                },
                 validator: (value) {
-                  if (value?.isEmpty ?? true) return 'Source is required';
+                  if (value == null) return 'Please select a source of income';
                   return null;
                 },
               ),
@@ -252,7 +278,6 @@ class _IncomeScreenState extends State<IncomeScreen> {
   @override
   void dispose() {
     _annualIncomeController.dispose();
-    _sourceController.dispose();
     _ageController.dispose();
     super.dispose();
   }

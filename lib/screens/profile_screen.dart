@@ -146,7 +146,14 @@ class ProfileScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
-                            child: const Text('Edit Detail'),
+                            child: const Text(
+                              'Edit Detail',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                            ),
                           ),
                           const SizedBox(height: 8),
                           ElevatedButton(
@@ -170,7 +177,14 @@ class ProfileScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
-                            child: const Text('Log Out'),
+                            child: const Text(
+                              'Log Out',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                            ),
                           ),
                         ],
                       ),
