@@ -14,6 +14,11 @@ class _GptScreenState extends State<GptScreen> {
   final TextEditingController _controller = TextEditingController();
   bool _isLoading = false;
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   Future<String> _getGeminiResponse(String prompt) async {
     setState(() => _isLoading = true);
     
@@ -148,6 +153,21 @@ class _GptScreenState extends State<GptScreen> {
                   ),
                 ),
                 const SizedBox(width: 8),
+                IconButton(
+                  icon: const Icon(
+                    Icons.mic,
+                    color: Color(0xFF1B4B3C),
+                  ),
+                  onPressed: () {
+                    // Show a snackbar indicating the feature is coming soon
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Voice feature coming soon!'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  },
+                ),
                 IconButton(
                   icon: const Icon(
                     Icons.send,

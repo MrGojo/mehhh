@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'dashboard_screen.dart';
 import 'profile_screen.dart';
 import 'pradhan_mantri_awas_form.dart';
+import 'gpt_screen.dart';
 
 class FamilySchemesScreen extends StatelessWidget {
   const FamilySchemesScreen({super.key});
@@ -150,7 +151,7 @@ class FamilySchemesScreen extends StatelessWidget {
           ),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
               icon: const Icon(
@@ -167,10 +168,30 @@ class FamilySchemesScreen extends StatelessWidget {
                 );
               },
             ),
-            const Icon(
-              Icons.mic,
-              color: Colors.white,
-              size: 30,
+            IconButton(
+              icon: const Icon(
+                Icons.chat_bubble_outline,
+                color: Colors.white,
+                size: 30,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const GptScreen(),
+                  ),
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.mic,
+                color: Colors.white,
+                size: 30,
+              ),
+              onPressed: () {
+                // Mic functionality will be added later
+              },
             ),
           ],
         ),

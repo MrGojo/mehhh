@@ -4,6 +4,7 @@ import 'login_screen.dart';
 import 'home_screen.dart';
 import 'registration_screen.dart';
 import 'dashboard_screen.dart';
+import 'gpt_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -241,6 +242,61 @@ class ProfileScreen extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: Container(
+        height: 60,
+        decoration: const BoxDecoration(
+          color: Color(0xFF1B4B3C),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              icon: const Icon(
+                Icons.home_outlined,
+                color: Colors.white,
+                size: 30,
+              ),
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const DashboardScreen(),
+                  ),
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.chat_bubble_outline,
+                color: Colors.white,
+                size: 30,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const GptScreen(),
+                  ),
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.mic,
+                color: Colors.white,
+                size: 30,
+              ),
+              onPressed: () {
+                // Mic functionality will be added later
+              },
+            ),
+          ],
         ),
       ),
     );

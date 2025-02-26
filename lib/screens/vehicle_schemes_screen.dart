@@ -3,6 +3,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'dashboard_screen.dart';
 import 'profile_screen.dart';
 import 'national_electric_form.dart';
+import 'gpt_screen.dart';
+import 'home_screen.dart';
 
 class VehicleSchemesScreen extends StatelessWidget {
   const VehicleSchemesScreen({super.key});
@@ -146,7 +148,7 @@ class VehicleSchemesScreen extends StatelessWidget {
           ),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
               icon: const Icon(
@@ -163,10 +165,30 @@ class VehicleSchemesScreen extends StatelessWidget {
                 );
               },
             ),
-            const Icon(
-              Icons.mic,
-              color: Colors.white,
-              size: 30,
+            IconButton(
+              icon: const Icon(
+                Icons.chat_bubble_outline,
+                color: Colors.white,
+                size: 30,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const GptScreen(),
+                  ),
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.mic,
+                color: Colors.white,
+                size: 30,
+              ),
+              onPressed: () {
+                // Mic functionality will be added later
+              },
             ),
           ],
         ),

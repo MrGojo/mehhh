@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dashboard_screen.dart';
 import 'profile_screen.dart';
+import 'gpt_screen.dart';
 
 class MedicalSchemesScreen extends StatelessWidget {
   const MedicalSchemesScreen({super.key});
@@ -134,7 +135,7 @@ class MedicalSchemesScreen extends StatelessWidget {
           ),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
               icon: const Icon(
@@ -151,10 +152,30 @@ class MedicalSchemesScreen extends StatelessWidget {
                 );
               },
             ),
-            const Icon(
-              Icons.mic,
-              color: Colors.white,
-              size: 30,
+            IconButton(
+              icon: const Icon(
+                Icons.chat_bubble_outline,
+                color: Colors.white,
+                size: 30,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const GptScreen(),
+                  ),
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.mic,
+                color: Colors.white,
+                size: 30,
+              ),
+              onPressed: () {
+                // Mic functionality will be added later
+              },
             ),
           ],
         ),
